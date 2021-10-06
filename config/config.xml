@@ -114,7 +114,7 @@
     </web-server>
     <listen-address>wlserver1</listen-address>
     <server-start>
-      <class-path>/apps/oracle/chipsdomain/chipsconfig</class-path>
+      <class-path>/apps/oracle/chipsdomain/chipsconfig:/apps/oracle/chipsdomain/chipsconfig/log4j.jar</class-path>
       <arguments>@start-args@</arguments>
     </server-start>
     <jta-migratable-target>

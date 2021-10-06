@@ -7,7 +7,8 @@ ARG ADMIN_PASSWORD
 
 ENV ORACLE_HOME=/apps/oracle \
     DOMAIN_NAME=chipsdomain \
-    ADMIN_NAME=wladmin
+    ADMIN_NAME=wladmin \
+    ARTIFACTORY_BASE_URL=http://repository.aws.chdev.org:8081/artifactory
 
 WORKDIR $ORACLE_HOME
 
@@ -22,6 +23,10 @@ COPY --chown=weblogic:weblogic config ${DOMAIN_NAME}/config/
 
 # Copy across chipsconfig directory
 COPY --chown=weblogic:weblogic chipsconfig ${DOMAIN_NAME}/chipsconfig/
+
+# Download libs from artifactory
+RUN cd ${DOMAIN_NAME}/chipsconfig && \
+    curl ${ARTIFACTORY_BASE_URL}/libs-release/log4j/log4j/1.2.14/log4j-1.2.14.jar -o log4j.jar
 
 # Set the credentials in the custom config.xml
 RUN $ORACLE_HOME/oracle_common/common/bin/wlst.sh -skipWLSModuleScanning container-scripts/set-credentials.py && \
