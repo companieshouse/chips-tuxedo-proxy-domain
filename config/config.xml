@@ -135,7 +135,7 @@
   </embedded-ldap>
   <configuration-version>12.2.1.4.0</configuration-version>
   <app-deployment>
-    <name>chips</name>
+    <name>tuxdirector</name>
     <target>wlcluster</target>
     <module-type>ear</module-type>
     <source-path>upload/chips-tuxedo-proxy.ear</source-path>
