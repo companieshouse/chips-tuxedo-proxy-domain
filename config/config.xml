@@ -83,32 +83,6 @@
       <remote-name>ONLINE_SERVICES</remote-name>
     </wtc-export>
   </wtc-server>
-  <wtc-server>
-    <name>WTCServer2</name>
-    <target>wlserver2</target>
-    <wtc-local-tux-dom>
-      <name>CHIPS_TUX2</name>
-      <access-point>CHIPS_TUX2</access-point>
-      <access-point-id>CHIPS_TUX</access-point-id>
-      <nw-addr>//wlserver2:7075</nw-addr>
-    </wtc-local-tux-dom>
-    <wtc-remote-tux-dom>
-      <name>CHIPSIMAGE2</name>
-      <access-point>CHIPSIMAGE2</access-point>
-      <access-point-id>CHIPSIMAGE2</access-point-id>
-      <local-access-point>CHIPS_TUX2</local-access-point>
-      <nw-addr>//1.1.1.1:1</nw-addr>
-      <federation-url></federation-url>
-      <federation-name></federation-name>
-    </wtc-remote-tux-dom>
-    <wtc-export>
-      <name>WTCExportedService-0</name>
-      <resource-name>ONLINE_SERVICES</resource-name>
-      <local-access-point>CHIPS_TUX2</local-access-point>
-      <ejb-name>tuxedo.services.OnlineServiceHome</ejb-name>
-      <remote-name>ONLINE_SERVICES</remote-name>
-    </wtc-export>
-  </wtc-server>
   <server>
     <name>wladmin</name>
     <ssl>
