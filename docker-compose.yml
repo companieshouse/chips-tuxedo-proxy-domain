@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  wladmin:
+    hostname: wladmin
+    image: ${CHIPS_TUXEDO_PROXY_DOMAIN_IMAGE:-chips-tuxedo-proxy-domain:latest}
+    ports:
+      - "21010:7001"
+    volumes:
+      - type: bind
+        source: ./running-servers
+        target: /apps/oracle/chipsdomain/servers
+    networks:
+      - chips-net
+    env_file: ./chips.properties
+    entrypoint: container-scripts/startAdmin.sh
+  wlserver1:
+    hostname: wlserver1
+    image: ${CHIPS_TUXEDO_PROXY_DOMAIN_IMAGE:-chips-tuxedo-proxy-domain:latest}
+    ports:
+      - "21011:7001"
+    volumes:
+      - type: bind
+        source: ./running-servers
+        target: /apps/oracle/chipsdomain/servers
+    networks:
+      - chips-net
+    env_file: ./chips.properties
+    entrypoint: container-scripts/startNodeManagerAndManagedServer.sh
+networks:
+  chips-net: 
