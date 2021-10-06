@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<domain xmlns="http://xmlns.oracle.com/weblogic/domain" xmlns:sec="http://xmlns.oracle.com/weblogic/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wls="http://xmlns.oracle.com/weblogic/security/wls" xsi:schemaLocation="http://xmlns.oracle.com/weblogic/security/wls http://xmlns.oracle.com/weblogic/security/wls/1.0/wls.xsd http://xmlns.oracle.com/weblogic/domain http://xmlns.oracle.com/weblogic/1.0/domain.xsd http://xmlns.oracle.com/weblogic/security/xacml http://xmlns.oracle.com/weblogic/security/xacml/1.0/xacml.xsd http://xmlns.oracle.com/weblogic/security/providers/passwordvalidator http://xmlns.oracle.com/weblogic/security/providers/passwordvalidator/1.0/passwordvalidator.xsd http://xmlns.oracle.com/weblogic/security http://xmlns.oracle.com/weblogic/1.0/security.xsd">
+  <name>chipsdomain</name>
+  <domain-version>12.2.1.4.0</domain-version>
+  <security-configuration>
+    <name>chipsdomain</name>
+    <realm>
+      <sec:authentication-provider xsi:type="wls:default-authenticatorType">
+        <sec:name>DefaultAuthenticator</sec:name>
+        <sec:control-flag>SUFFICIENT</sec:control-flag>
+      </sec:authentication-provider>
+      <sec:authentication-provider xsi:type="wls:default-identity-asserterType">
+        <sec:name>DefaultIdentityAsserter</sec:name>
+        <sec:active-type>AuthenticatedUser</sec:active-type>
+      </sec:authentication-provider>
+      <sec:role-mapper xmlns:xac="http://xmlns.oracle.com/weblogic/security/xacml" xsi:type="xac:xacml-role-mapperType">
+        <sec:name>XACMLRoleMapper</sec:name>
+      </sec:role-mapper>
+      <sec:authorizer xmlns:xac="http://xmlns.oracle.com/weblogic/security/xacml" xsi:type="xac:xacml-authorizerType">
+        <sec:name>XACMLAuthorizer</sec:name>
+      </sec:authorizer>
+      <sec:adjudicator xsi:type="wls:default-adjudicatorType">
+        <sec:name>DefaultAdjudicator</sec:name>
+      </sec:adjudicator>
+      <sec:credential-mapper xsi:type="wls:default-credential-mapperType">
+        <sec:name>DefaultCredentialMapper</sec:name>
+      </sec:credential-mapper>
+      <sec:cert-path-provider xsi:type="wls:web-logic-cert-path-providerType">
+        <sec:name>WebLogicCertPathProvider</sec:name>
+      </sec:cert-path-provider>
+      <sec:cert-path-builder>WebLogicCertPathProvider</sec:cert-path-builder>
+      <sec:deploy-role-ignored>false</sec:deploy-role-ignored>
+      <sec:deploy-policy-ignored>false</sec:deploy-policy-ignored>
+      <sec:name>myrealm</sec:name>
+      <sec:delegate-m-bean-authorization>true</sec:delegate-m-bean-authorization>
+      <sec:password-validator xmlns:pas="http://xmlns.oracle.com/weblogic/security/providers/passwordvalidator" xsi:type="pas:system-password-validatorType">
+        <sec:name>SystemPasswordValidator</sec:name>
+        <pas:min-password-length>8</pas:min-password-length>
+        <pas:min-numeric-or-special-characters>1</pas:min-numeric-or-special-characters>
+      </sec:password-validator>
+    </realm>
+    <default-realm>myrealm</default-realm>
+    <credential-encrypted></credential-encrypted>
+    <node-manager-username></node-manager-username>
+    <node-manager-password-encrypted></node-manager-password-encrypted>
+  </security-configuration>
+  <jta>
+    <timeout-seconds>600</timeout-seconds>
+    <abandon-timeout-seconds>86400</abandon-timeout-seconds>
+    <forget-heuristics>true</forget-heuristics>
+    <before-completion-iteration-limit>10</before-completion-iteration-limit>
+    <max-transactions>10000</max-transactions>
+    <max-unique-name-statistics>1000</max-unique-name-statistics>
+    <checkpoint-interval-seconds>300</checkpoint-interval-seconds>
+    <parallel-xa-enabled>true</parallel-xa-enabled>
+    <unregister-resource-grace-period>30</unregister-resource-grace-period>
+    <security-interop-mode>default</security-interop-mode>
+    <two-phase-enabled>true</two-phase-enabled>
+  </jta>
+  <wtc-server>
+    <name>WTCServer1</name>
+    <target>wlserver1</target>
+    <wtc-local-tux-dom>
+      <name>CHIPS_TUX1</name>
+      <access-point>CHIPS_TUX1</access-point>
+      <access-point-id>CHIPS_TUX</access-point-id>
+      <nw-addr>//wlserver1:7075</nw-addr>
+    </wtc-local-tux-dom>
+    <wtc-remote-tux-dom>
+      <name>CHIPSIMAGE2</name>
+      <access-point>CHIPSIMAGE2</access-point>
+      <access-point-id>CHIPSIMAGE2</access-point-id>
+      <local-access-point>CHIPS_TUX1</local-access-point>
+      <nw-addr>//1.1.1.1:1</nw-addr>
+      <federation-url></federation-url>
+      <federation-name></federation-name>
+    </wtc-remote-tux-dom>
+    <wtc-export>
+      <name>WTCExportedService-0</name>
+      <resource-name>ONLINE_SERVICES</resource-name>
+      <local-access-point>CHIPS_TUX1</local-access-point>
+      <ejb-name>tuxedo.services.OnlineServiceHome</ejb-name>
+      <remote-name>ONLINE_SERVICES</remote-name>
+    </wtc-export>
+  </wtc-server>
+  <server>
+    <name>wladmin</name>
+    <ssl>
+      <hostname-verifier xsi:nil="true"></hostname-verifier>
+      <hostname-verification-ignored>true</hostname-verification-ignored>
+    </ssl>
+    <listen-address>wladmin</listen-address>
+    <weblogic-plugin-enabled>true</weblogic-plugin-enabled>
+  </server>
+  <server>
+    <name>wlserver1</name>
+    <ssl>
+      <hostname-verifier xsi:nil="true"></hostname-verifier>
+      <hostname-verification-ignored>true</hostname-verification-ignored>
+    </ssl>
+    <log>
+      <rotation-type>byTime</rotation-type>
+      <file-count>7</file-count>
+    </log>
+    <machine>mach-wlserver1</machine>
+    <listen-port>7001</listen-port>
+    <cluster>wlcluster</cluster>
+    <web-server>
+      <web-server-log>
+        <rotation-type>byTime</rotation-type>
+        <number-of-files-limited>false</number-of-files-limited>
+        <file-count>7</file-count>
+      </web-server-log>
+    </web-server>
+    <listen-address>wlserver1</listen-address>
+    <server-start>
+      <class-path>/apps/oracle/chipsdomain/chipsconfig</class-path>
+      <arguments>@start-args@</arguments>
+    </server-start>
+    <jta-migratable-target>
+      <user-preferred-server>wlserver1</user-preferred-server>
+      <cluster>wlcluster</cluster>
+    </jta-migratable-target>
+    <weblogic-plugin-enabled>true</weblogic-plugin-enabled>
+  </server>
+  <cluster>
+    <name>wlcluster</name>
+    <cluster-address>wlserver1:7001</cluster-address>
+    <cluster-messaging-mode>unicast</cluster-messaging-mode>
+  </cluster>
+  <production-mode-enabled>true</production-mode-enabled>
+  <embedded-ldap>
+    <name>chipsdomain</name>
+    <credential-encrypted></credential-encrypted>
+  </embedded-ldap>
+  <configuration-version>12.2.1.4.0</configuration-version>
+  <app-deployment>
+    <name>tuxdirector</name>
+    <target>wlcluster</target>
+    <module-type>ear</module-type>
+    <source-path>upload/chips-tuxedo-proxy.ear</source-path>
+    <security-dd-model>DDOnly</security-dd-model>
+    <staging-mode>nostage</staging-mode>
+    <plan-staging-mode xsi:nil="true"></plan-staging-mode>
+    <cache-in-app-directory>false</cache-in-app-directory>
+  </app-deployment>
+  <machine xsi:type="unix-machineType">
+    <name>mach-wlserver1</name>
+    <node-manager>
+      <listen-address>wlserver1</listen-address>
+    </node-manager>
+  </machine>
+  <migratable-target>
+    <name>wlserver1 (migratable)</name>
+    <notes>This is a system generated default migratable target for a server. Do not delete manually.</notes>
+    <user-preferred-server>wlserver1</user-preferred-server>
+    <cluster>wlcluster</cluster>
+  </migratable-target>
+  <jmx>
+    <compatibility-m-bean-server-enabled>true</compatibility-m-bean-server-enabled>
+    <management-ejb-enabled>true</management-ejb-enabled>
+    <platform-m-bean-server-enabled>false</platform-m-bean-server-enabled>
+    <invocation-timeout-seconds>0</invocation-timeout-seconds>
+    <platform-m-bean-server-used>true</platform-m-bean-server-used>
+  </jmx>
+  <admin-server-name>wladmin</admin-server-name>
+</domain>
