@@ -38,7 +38,11 @@ There are a number of tuxedo related properties that can be defined in order to 
 |TUX_EXPORT_N|Exported services - where N is a unique id to allow for multiple entries. This takes the form: `<unique name>=<local service name>\|<remote service name>\|<local ap name>\|<ejb>`. |TUX_EXPORT_0=ONLINE_SERVICES\|ONLINE_SERVICES\|CHIPS_EF_BATCH0_TUX\|tuxedo.services.OnlineServiceHome
 |TUX_IMPORT_N|Imported services - where N is a unique id to allow for multiple entries. This takes the form: `<unique name>=<local service name>\|<remote service name>\|<local ap name>\|<remote ap names>`.|TUX_IMPORT_0=CABS_Ord\|CABS_Ord\|CHIPS_EF_BATCH0_TUX\|CHIPS_TUX_FROM_CHIPS0,CHIPS_TUX_FROM_CHIPS1
 
-
+Optionally, the domain can be initialised with additional internal realm users specified by environment properties:
+|Property|Description  |Example
+|--|----|--
+|REALM_USER_N|Additional user to add to the realm.  This is mainly useful for adding users for the remote tuxedo domains, to allow for incoming calls.  This takes the form: `<unique name>=<username>\|<password>`.|REALM_USER_0=myusername\|mypassword
+    
 ## docker-compose
 docker-compose can be used to start all the required containers in one operation.
 
