@@ -32,6 +32,10 @@ RUN cd ${DOMAIN_NAME}/chipsconfig && \
 RUN $ORACLE_HOME/oracle_common/common/bin/wlst.sh -skipWLSModuleScanning container-scripts/set-credentials.py && \
     chmod 754 container-scripts/*.sh
 
+# Modify the umask setting in the WebLogic start scripts
+RUN sed -i 's/umask 027/umask 022/' ${DOMAIN_NAME}/bin/startWebLogic.sh && \
+    sed -i 's/umask 027/umask 022/' ${ORACLE_HOME}/wlserver/server/bin/startNodeManager.sh
+
 USER weblogic
 CMD ["bash"]
 
