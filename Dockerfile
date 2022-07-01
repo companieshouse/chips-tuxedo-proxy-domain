@@ -26,7 +26,8 @@ COPY --chown=weblogic:weblogic chipsconfig ${DOMAIN_NAME}/chipsconfig/
 
 # Download libs from artifactory
 RUN cd ${DOMAIN_NAME}/chipsconfig && \
-    curl ${ARTIFACTORY_BASE_URL}/libs-release/log4j/log4j/1.2.14/log4j-1.2.14.jar -o log4j.jar
+    curl ${ARTIFACTORY_BASE_URL}/libs-release/log4j/log4j/1.2.14/log4j-1.2.14.jar -o log4j.jar && \
+    curl ${ARTIFACTORY_BASE_URL}/libs-release/uk/gov/companieshouse/weblogic-tux-hostname-patch/1.0.0/weblogic-tux-hostname-patch-1.0.0.jar -o weblogic-tux-hostname-patch-1.0.0.jar
 
 # Set the credentials in the custom config.xml
 RUN $ORACLE_HOME/oracle_common/common/bin/wlst.sh -skipWLSModuleScanning container-scripts/set-credentials.py && \
