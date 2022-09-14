@@ -97,6 +97,8 @@
       <cluster>wlcluster</cluster>
     </jta-migratable-target>
     <weblogic-plugin-enabled>true</weblogic-plugin-enabled>
+    <graceful-shutdown-timeout>30</graceful-shutdown-timeout>
+    <ignore-sessions-during-shutdown>true</ignore-sessions-during-shutdown>
   </server>
   <cluster>
     <name>wlcluster</name>
