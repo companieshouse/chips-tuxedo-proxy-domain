@@ -83,7 +83,7 @@
     <web-server>
       <web-server-log>
         <rotation-type>byTime</rotation-type>
-        <number-of-files-limited>false</number-of-files-limited>
+        <number-of-files-limited>true</number-of-files-limited>
         <file-count>7</file-count>
       </web-server-log>
     </web-server>
