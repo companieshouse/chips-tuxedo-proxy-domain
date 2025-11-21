@@ -8,6 +8,9 @@ fi
 # This is the admin server so we will use different memory args
 export USER_MEM_ARGS=${ADMIN_MEM_ARGS}
 
+# Set the startup params of the Admin server
+export JAVA_OPTIONS="${JAVA_OPTIONS} ${ADMIN_START_ARGS}"
+
 DOMAIN_HOME="/apps/oracle/${DOMAIN_NAME}"
 . ${DOMAIN_HOME}/bin/setDomainEnv.sh
 
