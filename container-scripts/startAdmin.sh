@@ -39,4 +39,10 @@ ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh -skipWLSModuleScanning ${ORACLE_
 # Prevent Derby from being started
 export DERBY_FLAG=false
 
+# Generate a user-projects.json file from a template to create a default provider in the admin console
+CONSOLE_PERSISTENCE_DIR=${DOMAIN_HOME}/remote-console-persistence/weblogic
+mkdir -p ${CONSOLE_PERSISTENCE_DIR}
+envsubst < ${ORACLE_HOME}/container-scripts/user-projects.json.template > ${CONSOLE_PERSISTENCE_DIR}/user-projects.json
+chmod 400 ${CONSOLE_PERSISTENCE_DIR}/user-projects.json
+
 ${DOMAIN_HOME}/bin/startWebLogic.sh $*
