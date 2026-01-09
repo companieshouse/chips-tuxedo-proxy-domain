@@ -64,16 +64,21 @@
     <ssl>
       <hostname-verifier xsi:nil="true"></hostname-verifier>
       <hostname-verification-ignored>true</hostname-verification-ignored>
+      <server-private-key-alias>ch-weblogic-identity</server-private-key-alias>
     </ssl>
     <listen-port>7001</listen-port>
     <listen-address>wladmin</listen-address>
     <weblogic-plugin-enabled>true</weblogic-plugin-enabled>
+    <key-stores>CustomIdentityAndJavaStandardTrust</key-stores>
+    <custom-identity-key-store-file-name>security/ch-weblogic-identity.p12</custom-identity-key-store-file-name>
+    <custom-identity-key-store-type>PKCS12</custom-identity-key-store-type>
   </server>
   <server>
     <name>wlserver1</name>
     <ssl>
       <hostname-verifier xsi:nil="true"></hostname-verifier>
       <hostname-verification-ignored>true</hostname-verification-ignored>
+      <server-private-key-alias>ch-weblogic-identity</server-private-key-alias>
     </ssl>
     <log>
       <rotation-type>byTime</rotation-type>
@@ -101,6 +106,9 @@
     <graceful-shutdown-timeout>30</graceful-shutdown-timeout>
     <ignore-sessions-during-shutdown>true</ignore-sessions-during-shutdown>
     <weblogic-plugin-enabled>true</weblogic-plugin-enabled>
+    <key-stores>CustomIdentityAndJavaStandardTrust</key-stores>
+    <custom-identity-key-store-file-name>security/ch-weblogic-identity.p12</custom-identity-key-store-file-name>
+    <custom-identity-key-store-type>PKCS12</custom-identity-key-store-type>
   </server>
   <cluster>
     <name>wlcluster</name>
