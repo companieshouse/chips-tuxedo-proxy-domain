@@ -21,9 +21,6 @@ def setIdentityAndSSLCredentials(server, encrypted_password):
 encrypted_password = encrypt(ch_weblogic_identity_password, domain_path)
 setIdentityAndSSLCredentials(admin_name, encrypted_password)
 setIdentityAndSSLCredentials('wlserver1', encrypted_password)
-setIdentityAndSSLCredentials('wlserver2', encrypted_password)
-setIdentityAndSSLCredentials('wlserver3', encrypted_password)
-setIdentityAndSSLCredentials('wlserver4', encrypted_password)
 
 # Write and close domain after final changes
 updateDomain()
