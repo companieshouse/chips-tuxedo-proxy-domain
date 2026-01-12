@@ -1,9 +1,8 @@
 #!/bin/bash
 
-if [ -z ${ADMIN_PASSWORD+x} ]; then
-  echo "Env var ADMIN_PASSWORD must be set! Exiting.."
-  exit 1
-fi
+# Check that required environment variables are set
+: ${ADMIN_PASSWORD:?Env var ADMIN_PASSWORD must be set! Exiting..}
+: ${CH_WEBLOGIC_IDENTITY_PASSWORD:?Env var CH_WEBLOGIC_IDENTITY_PASSWORD must be set! Exiting..}
 
 # This is the admin server so we will use different memory args
 export USER_MEM_ARGS=${ADMIN_MEM_ARGS}
@@ -36,8 +35,9 @@ sed -i -e '/@tuxedo-config@/{r tuxedo-config.xml' -e 'd' -e '}' config.xml
 # Set the managed server startup arguments
 sed -i "s/@start-args@/${START_ARGS}/g" ${DOMAIN_HOME}/config/config.xml
 
-# Update the domain credentials to those provided by env var
+# Update the domain credentials to those provided by env vars
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh -skipWLSModuleScanning ${ORACLE_HOME}/container-scripts/set-credentials.py
+${ORACLE_HOME}/oracle_common/common/bin/wlst.sh -skipWLSModuleScanning ${ORACLE_HOME}/container-scripts/set-identity-credentials.py
 
 # Prevent Derby from being started
 export DERBY_FLAG=false
