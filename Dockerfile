@@ -1,4 +1,4 @@
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-weblogic:2.0.3 AS builder
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-weblogic:2.0.4 AS builder
 
 # IMPORTANT - the default admin password should be supplied as a build arg
 # e.g. --build-arg ADMIN_PASSWORD=notsecure123.  This password MUST later be reset
@@ -37,7 +37,7 @@ RUN cd ${DOMAIN_NAME}/chipsconfig && \
     curl -L -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}" ${ARTIFACTORY_BASE_URL}/uk/gov/companieshouse/weblogic-tux-hostname-patch/1.0.0/weblogic-tux-hostname-patch-1.0.0.jar -o weblogic-tux-hostname-patch-1.0.0.jar && \
     curl -L -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}" ${ARTIFACTORY_BASE_URL}/uk/gov/companieshouse/weblogic-tux-hostname-patch/2.0.0/weblogic-tux-hostname-patch-2.0.0.jar -o weblogic-tux-hostname-patch-2.0.0.jar
 
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-weblogic:2.0.3
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-weblogic:2.0.4
 
 ENV DOMAIN_NAME=chipsdomain
 ENV DOMAIN_HOME=${ORACLE_HOME}/${DOMAIN_NAME} \
